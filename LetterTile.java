@@ -1,5 +1,3 @@
-package phantom_hangman;
-
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseListener;
@@ -50,7 +48,7 @@ public class LetterTile extends JLabel
     private BufferedImage image;
     
     /**
-     * A custom MouseListener from the GameBoard class to change the tiles on
+     * A custom MouseListener from the GameGUI class to change the tiles on
      * a click.
      */
     private MouseListener tileListener;

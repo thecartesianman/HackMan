@@ -1,5 +1,3 @@
-package phantom_hangman;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -19,7 +17,7 @@ import java.util.*;
 /**
  * Displays a Hangman game board to the screen for interaction with the player.
  */
-public class GameBoard extends JFrame 
+public class GameGUI extends JFrame
 {
 
     private final int WIDTH;
@@ -46,7 +44,7 @@ public class GameBoard extends JFrame
     /**
      * The default constructor.
      */
-    public GameBoard()
+    public GameGUI()
     {
         WIDTH = 500;
         HEIGHT = 550;
@@ -68,7 +66,7 @@ public class GameBoard extends JFrame
     }
     
     /**
-     * Initializes all elements of the GameBoard that must be refreshed upon
+     * Initializes all elements of the GameGUI that must be refreshed upon
      * the start of a new game.
      */
     private void initialize()
@@ -96,8 +94,7 @@ public class GameBoard extends JFrame
     /**
      * Prompts the user to confirm before quitting out of the window.
      */
-    private void addCloseWindowListener()
-    {
+    private void addCloseWindowListener() {
         // NOTE: Must be DO_NOTHING_ON_CLOSE for prompt to function correctly
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         
@@ -118,10 +115,9 @@ public class GameBoard extends JFrame
     }
     
     /**
-     * Adds the correct and incorrect labels to the top of the GameBoard
+     * Adds the correct and incorrect labels to the top of the GameGUI
      */
-    private void addTextPanel()
-    {
+    private void addTextPanel() {
         JPanel textPanel = new JPanel();
         textPanel.setLayout(new GridLayout(1,2));
         textPanel.add(correct);
@@ -132,11 +128,10 @@ public class GameBoard extends JFrame
     }
     
     /**
-     * Adds the LetterRack to the bottom of the GameBoard and attaches
+     * Adds the LetterRack to the bottom of the GameGUI and attaches
      * the LetterTile TileListeners to the LetterTiles.
      */
-    private void addLetterRack()
-    {
+    private void addLetterRack() {
         gameRack = new LetterRack(wordToGuess,
                 LETTER_IMAGE_DIRECTORY, 
                 LETTER_IMAGE_TYPE);
@@ -146,10 +141,9 @@ public class GameBoard extends JFrame
     
     /**
      * Adds a panel that contains the hangman images to the middle of the
-     * GameBoard.
+     * GameGUI.
      */
-    private void addHangman()
-    {
+    private void addHangman() {
         JPanel hangmanPanel = new JPanel();
         gameHangman = new Hangman(HANGMAN_IMAGE_BASE_NAME,
                 HANGMAN_IMAGE_DIRECTORY,
@@ -183,11 +177,22 @@ public class GameBoard extends JFrame
         correct.setText(correct.getText() + passwordHidden.toString());
     }
 
+    private void newGameDialog(String newInterface) {
+        int dialogResult = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to end the current game,\n" +
+                        "and view " + newInterface + "?",
+                "End Current Game?",
+                JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION)
+            //initialize(); // re-initialize the GameGUI
+        else
+            System.exit(0);
+    }
+
     /**
      * Prompts the user for a new game when one game ends.
      */
-    private void newGameDialog()
-    {
+    private void newGameDialog() {
         int dialogResult = JOptionPane.showConfirmDialog(null,
                 "Your Score: " + Integer.toString(((11 - numIncorrect)*100)) +
                 "\nThe word was: " + wordToGuess +
@@ -195,7 +200,7 @@ public class GameBoard extends JFrame
                 "Play Again?",
                 JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION)
-            initialize(); // re-initialize the GameBoard
+            initialize(); // re-initialize the GameGUI
         else
             System.exit(0);
     }
@@ -204,14 +209,11 @@ public class GameBoard extends JFrame
      * A custom MouseListener for the LetterTiles that detects when the user
      * "guesses" (clicks on) a LetterTile and updates the game accordingly.
      */
-    private class TileListener implements MouseListener 
-    {
+    private class TileListener implements MouseListener {
         @Override
-        public void mousePressed(MouseEvent e) 
-        {
+        public void mousePressed(MouseEvent e) {
             Object source = e.getSource();
-            if(source instanceof LetterTile)
-            {
+            if(source instanceof LetterTile) {
                 char c = ' ';
                 int index = 0;
                 boolean updated = false;
@@ -229,7 +231,7 @@ public class GameBoard extends JFrame
                     updated = true;
                 }
                 
-                // if the guess was correct, update the GameBoard and check
+                // if the guess was correct, update the GameGUI and check
                 //     for a win
                 if (updated)
                 {

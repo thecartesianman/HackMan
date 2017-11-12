@@ -1,5 +1,3 @@
-package phantom_hangman;
-
 import java.awt.GridLayout;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -16,42 +14,34 @@ public class LetterRack extends JPanel
      * The number of columns present in the letter tile rack.
      */
     private final int RACK_COLS;
-    
     /**
      * The number of columns present in the letter tile rack.
      */
     private final int RACK_ROWS;
-    
     /**
      * The layout of the letter rack.
      */
     private final GridLayout LETTER_RACK_LAYOUT;
-    
     /**
      * The capacity of the letter rack.
      */
     private final int CAPACITY;
-    
     /**
      * The directory containing the letter images.
      */
     private final String IMAGE_DIRECTORY;
-    
     /**
      * The type of image (.jpg, .png, etc. to include the period).
      */
     private final String IMAGE_TYPE;
-    
     /**
      * The wordToGuess chosen to be guessed.
      */
     private final String wordToGuess;
-    
     /**
-     * An array of letters to be displayed on the GameBoard.
+     * An array of letters to be displayed on the GameGUI.
      */
     private final ArrayList<LetterTile> rack;
-    
     /**
      * The default constructor.
      */

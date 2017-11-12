@@ -1,5 +1,3 @@
-package phantom_hangman;
-
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -17,46 +15,39 @@ public class Hangman extends JLabel
      * The preferred width of the images.
      */
     private final int PREFERRED_WIDTH;
-    
     /**
      * The preferred height of the images.
      */
     private final int PREFERRED_HEIGHT;
-    
     /**
      * The base (common) name of the series of images to use (e.g. "hangman" in
      * "hangman_0.png, hangman_1.png, ..."
      */
     private final String IMAGE_BASE_NAME;
-    
     /**
      * The directory containing the hangman images.
      */
     private final String IMAGE_DIRECTORY;
-    
     /**
      * The type of image (.jpg, .png, etc. to include the period).
      */
     private final String IMAGE_TYPE;
-    
     /**
      * The current path of the current image.
      */
     private String path;
-    
     /**
      * The current image being displayed.
      */
     private BufferedImage image;
-    
+
+
     /**
      * The default constructor.
      */
-    public Hangman()
-    {
+    public Hangman() {
         this("hangman", "res/images/", ".png");
     }
-    
     /**
      * Creates a new Hangman given the image series' base name, the directory
      * of the hangman images, and the type of image.
@@ -64,9 +55,7 @@ public class Hangman extends JLabel
      * @param imageDirectory The directory containing the hangman images.
      * @param imageType The type of the hangman images.
      */
-    public Hangman(String imageBaseName, String imageDirectory, 
-            String imageType)
-    {
+    public Hangman(String imageBaseName, String imageDirectory, String imageType) {
         PREFERRED_WIDTH = 440;
         PREFERRED_HEIGHT = 255;
         
