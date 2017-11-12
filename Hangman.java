@@ -9,8 +9,7 @@ import javax.swing.JLabel;
 /**
  * Displays a selected series of hangman images to the game board.
  */
-public class Hangman extends JLabel
-{
+public class Hangman extends JLabel {
     /**
      * The preferred width of the images.
      */
@@ -48,34 +47,36 @@ public class Hangman extends JLabel
     public Hangman() {
         this("hangman", "res/images/", ".png");
     }
+
     /**
      * Creates a new Hangman given the image series' base name, the directory
      * of the hangman images, and the type of image.
-     * @param imageBaseName The base name of the image series to be used.
+     *
+     * @param imageBaseName  The base name of the image series to be used.
      * @param imageDirectory The directory containing the hangman images.
-     * @param imageType The type of the hangman images.
+     * @param imageType      The type of the hangman images.
      */
     public Hangman(String imageBaseName, String imageDirectory, String imageType) {
         PREFERRED_WIDTH = 440;
         PREFERRED_HEIGHT = 255;
-        
+
         IMAGE_BASE_NAME = imageBaseName;
         IMAGE_DIRECTORY = imageDirectory;
         IMAGE_TYPE = imageType;
-        
+
         // you must suffix all images with _(image number) for this to work
         setPreferredSize(new Dimension(PREFERRED_WIDTH, PREFERRED_HEIGHT));
         path = IMAGE_DIRECTORY + IMAGE_BASE_NAME + "_0" + IMAGE_TYPE;
         image = loadImage(path);
     }
-    
+
     /**
      * Loads an image from a file.
+     *
      * @param imagePath The path to load an image from.
      * @return The image from the specified path, or exits if fails to load.
      */
-    private BufferedImage loadImage(String imagePath)
-    {
+    private BufferedImage loadImage(String imagePath) {
         BufferedImage img = null;
 
         try {
@@ -84,49 +85,52 @@ public class Hangman extends JLabel
             System.err.println("Error: Image at " + imagePath + " could not be found");
             System.exit(1);
         }
-        
+
         return img;
     }
-    
+
     /**
      * Load the next hangman image in the series.
+     *
      * @param imageNumber The number of the image to load.
      */
-    public void nextImage(int imageNumber) 
-    { 
+    public void nextImage(int imageNumber) {
         loadNewImage(String.valueOf(imageNumber));
     }
-    
+
     /**
      * Display the losing image.
      */
-    public void loseImage() { loadNewImage("lose"); }
-    
+    public void loseImage() {
+        loadNewImage("lose");
+    }
+
     /**
      * Display the winning image.
      */
-    public void winImage() { loadNewImage("win"); }
-    
+    public void winImage() {
+        loadNewImage("win");
+    }
+
     /**
      * Loads a new image in the hangman image series.
+     *
      * @param suffix The suffix of the image name.
      */
-    private void loadNewImage(String suffix)
-    {
+    private void loadNewImage(String suffix) {
         path = IMAGE_DIRECTORY + IMAGE_BASE_NAME + "_" + suffix + IMAGE_TYPE;
         image = loadImage(path);
-        repaint();  
+        repaint();
     }
-    
+
     @Override
-    protected void paintComponent(Graphics g) 
-    {
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image, 
-                0, 
-                0, 
-                PREFERRED_WIDTH, 
-                PREFERRED_HEIGHT, 
+        g.drawImage(image,
+                0,
+                0,
+                PREFERRED_WIDTH,
+                PREFERRED_HEIGHT,
                 null);
     }
 }

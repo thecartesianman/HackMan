@@ -8,16 +8,7 @@ import javax.swing.JPanel;
 /**
  *
  */
-public class LetterRack extends JPanel
-{
-    /**
-     * The number of columns present in the letter tile rack.
-     */
-    private final int RACK_COLS;
-    /**
-     * The number of columns present in the letter tile rack.
-     */
-    private final int RACK_ROWS;
+public class LetterRack extends JPanel {
     /**
      * The layout of the letter rack.
      */
@@ -42,80 +33,74 @@ public class LetterRack extends JPanel
      * An array of letters to be displayed on the GameGUI.
      */
     private final ArrayList<LetterTile> rack;
+
     /**
      * The default constructor.
      */
-    public LetterRack()
-    {
-        this("wordToGuess", "res/images/", ".png");
+    public LetterRack() {
+        this("wordToGuess", "res/images/", ".png", 4, 8);
     }
-    
+
     /**
      * Creates a new LetterRack given the wordToGuess to be guessed, letter image
      * directory, and letter image type
-     * @param inPassword The wordToGuess to be guessed.
+     *
+     * @param inPassword     The wordToGuess to be guessed.
      * @param imageDirectory The directory of the letter images.
-     * @param imageType The type of the letter images.
+     * @param imageType      The type of the letter images.
      */
-    public LetterRack(String inPassword, String imageDirectory, 
-            String imageType)
-    {
-        RACK_COLS = 8;
-        RACK_ROWS = 4;
-        LETTER_RACK_LAYOUT = new GridLayout(RACK_ROWS, RACK_COLS);
+    public LetterRack(String inPassword, String imageDirectory, String imageType, int rackRows, int rackColumns) {
+        LETTER_RACK_LAYOUT = new GridLayout(rackRows, rackColumns);
         LETTER_RACK_LAYOUT.setVgap(10);
-        CAPACITY = RACK_ROWS * RACK_COLS;
-        
+        CAPACITY = rackRows * rackColumns;
+
         IMAGE_DIRECTORY = imageDirectory;
         IMAGE_TYPE = imageType;
-        
+
         rack = new ArrayList<>();
         wordToGuess = inPassword;
-        
+
         // add a little padding to make sure the letter rack is centered
         setBorder(BorderFactory.createEmptyBorder(10, 17, 10, 10));
         setLayout(LETTER_RACK_LAYOUT);
         loadRack();
     }
-    
+
     /**
      * Builds and loads the letter rack with letter tiles.
      */
-    private void loadRack()
-    {
+    private void loadRack() {
         buildRack();
         for (LetterTile tile : rack)
             add(tile);
     }
-    
+
     /**
      * Builds a letter rack from a blend of the wordToGuess and random letters.
      */
-    private void buildRack()
-    {
+    private void buildRack() {
         char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        for(char c : alphabet) {
+        for (char c : alphabet) {
             rack.add(new LetterTile(c,
                     IMAGE_DIRECTORY,
                     IMAGE_TYPE));
         }
     }
-    
+
     /**
      * Add a TileListener to each LetterTile in the LetterRack
+     *
      * @param l The TileListener to be added.
      */
-    public void attachListeners(MouseListener l)
-    {
+    public void attachListeners(MouseListener l) {
         for (LetterTile tile : rack)
             tile.addTileListener(l);
     }
-    
+
     /**
      * Remove all TileListeners from all LetterTiles.
      */
-    public void removeListeners()
-    {
+    public void removeListeners() {
         for (LetterTile tile : rack)
             tile.removeTileListener();
     }
